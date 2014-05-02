@@ -26,6 +26,7 @@ fs.readFile('./view/example.tempy', 'utf-8', function(err, data) {
 			'this is baz2-3'
 		]
 	]);
+	contents.assign('qux', [true, false, false, true]);
 
 	var rendered_contents = contents.render();
 
