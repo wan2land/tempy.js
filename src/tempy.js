@@ -264,6 +264,9 @@
 						continue;
 					}
 
+					// 세미콜론은 걍 지나갑시다.
+					scanner.scan(/^\s*\;/);
+
 					// 그외 경우에 처리.
 					switch( current_block.type ) {
 						case 1 : // if
@@ -338,6 +341,8 @@
 							}
 							continue;
 					}
+
+
 //{{ ? debug }}
 					console.log( (new Array(block_stack.length)).join('    '),
 						"[모르겠는 구문 :: ??")
