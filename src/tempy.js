@@ -67,7 +67,9 @@
 		assigned_value = {},
 		re_eoc = /[\n\r;]|(\}\})|(--)/,
 		re_eol = /[\n\r;]/,
-
+		trim = function( string ) {
+			return string.replace(/(^\s*)|(\s*$)/g, '');
+		},
 		getAssignedValue = function( name ) {
 			var k, result = assigned_value;
 			name = name.split('.');
@@ -80,7 +82,7 @@
 			return result;
 		},
 		parseValue = function( value ) {
-			value = value.replace(/(^\s*)|(\s*$)/g, ''); // trim :)
+			value = trim( value );
 			if ( /^true$/i.test(value) ) {
 				return true;
 			}
@@ -225,7 +227,7 @@
 //{{/}}
 						var
 						iter = value.split('->'),
-						iter_name = iter[1],
+						iter_name = trim( iter[1] ),
 						iter_value = parseValue( iter[0] ),
 						iter_len = iter_value.length
 						;
