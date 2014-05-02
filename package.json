@@ -1,0 +1,8 @@
+{
+	"name" : "Tempy",
+
+	"dependencies" : {
+		"node-minify" : "*"
+	}
+
+}
