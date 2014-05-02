@@ -117,6 +117,9 @@
 			},
 			render : function( values ) {
 
+				for( idx in values ) {
+					this.assign( idx, values[idx] );
+				}
 //
 				var
 				scanner = new Scanner( '}' + '}' + contents + '{' + '{' ),
@@ -203,12 +206,10 @@
 						var
 						iter = value.split('->'),
 						iter_name = trim( iter[1] ),
-						iter_value = parseValue( iter[0] ),
+						iter_value = parseValue( iter[0] ) || [],
 						iter_len = iter_value.length
 						;
-						if ( Object(iter_value) !== iter_value ) {
-							throw new Error('loop를 사용할 수 없는 형태의 변수입니다.');
-						}
+
 						if ( iter_len === 0 || current_block.is_print === false ) {
 							current_block = {
 								type : 2,
