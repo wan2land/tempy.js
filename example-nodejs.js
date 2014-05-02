@@ -1,5 +1,6 @@
 var
-Tempy = require('./build/tempy'),
+//Tempy = require('./build/tempy'),
+Tempy = require('./src/tempy'),
 fs = require('fs')
 ;
 
@@ -7,11 +8,26 @@ fs.readFile('./view/example.tempy', 'utf-8', function(err, data) {
 
 	var contents = Tempy.read( data );
 	contents.assign('foo', 'This is foo string.');
-	contents.assign('bar', [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]] );
+	contents.assign('bar', ['this is bar0','this is bar1','this is bar2','this is bar3']);
+	contents.assign('baz', [
+		[
+			'this is baz0-0',
+			'this is baz0-1',
+		],
+		[
+			'this is baz1-0',
+			'this is baz1-1',
+			'this is baz1-2'
+		],
+		[
+			'this is baz2-0',
+			'this is baz2-1',
+			'this is baz2-2',
+			'this is baz2-3'
+		]
+	]);
 
-	var rendered_contents = contents.render({
-		hello : 'world'
-	});
+	var rendered_contents = contents.render();
 
 	console.log( rendered_contents );
 

@@ -65,7 +65,7 @@
 		var
 
 		assigned_value = {},
-		re_eoc = /[\n\r;]|(\}\})/,
+		re_eoc = /[\n\r;]|(\}\})|(--)/,
 		re_eol = /[\n\r;]/,
 
 		getAssignedValue = function( name ) {
@@ -120,11 +120,9 @@
 			},
 			render : function( values ) {
 
+//{{ ? debug }}
 				var start_t = process.hrtime();
-//* 0.000084748
-				// values 
-				// this.assign( key, value );
-
+//{{/}}
 				var
 				scanner = new Scanner( '}' + '}' + contents + '{' + '{' ),
 				result = '',
@@ -140,13 +138,13 @@
 				;
 				// initialize :)
 				block_stack.push( current_block );
-
 				while( !scanner.eos() ) {
 					//sleep(1000);
 					if ( scanner.scan(/^\s*\}\}/) ) {
 						value = scanner.scanUntil(/\{\{/);
 //{{ ? debug }}
-						console.log('[Code, 출력 : ', value.replace(/[\r\n]/, '\\n'), ']');
+						console.log( (new Array(block_stack.length)).join('    '),
+							'[출력 : ', value.replace(/[\r\n]/g, '\\n'), ']');
 //{{ / }}
 						if ( current_block.is_print ) {
 							result += value;
@@ -160,7 +158,8 @@
 					if ( scanner.scan(/^\s*--/) ) {
 						value = scanner.scanUntil(re_eoc);
 //{{ ? debug }}
-						console.log('[Code, 주석 :', value, ']' );
+						console.log( (new Array(block_stack.length)).join('    '),
+							'[주석 :', value, ']' );
 //{{ / }}
 						scanner.scan(re_eol);
 
@@ -174,7 +173,8 @@
 							value = parseValue(value );
 							if ( typeof value !== 'undefined' && value !== null ) {
 //{{ ? debug }}
-								console.log('[Code, 출력 : ', value, ']');
+								console.log( (new Array(block_stack.length)).join('    '),
+									'[출력 : ', value.replace(/[\r\n]/g, '\\n'), ']');
 //{{ / }}
 								result += value.toString();
 							}
@@ -189,11 +189,13 @@
 	
 						value = parseValue(value );
 //{{ ? debug }}
-						console.log('[조건문 시작]');
+						console.log( (new Array(block_stack.length)).join('    '),
+							'[조건문 시작]');
 //{{/}}
 						if ( value ) { // true 일때
 //{{ ? debug }}
-							console.log('[조건문, IF 출력]');
+							console.log( (new Array(block_stack.length)).join('    '),
+								'[조건문, IF 출력]');
 //{{/}}
 							current_block = {
 								type : 1,
@@ -218,7 +220,8 @@
 					if ( scanner.scan(/^\s*\@/) ) {
 						value = scanner.scanUntil(re_eoc);
 //{{ ? debug }}
-						console.log('[반복문 시작]');
+						console.log( (new Array(block_stack.length)).join('    '),
+							'[반복문 시작]');
 //{{/}}
 						var
 						iter = value.split('->'),
@@ -273,7 +276,8 @@
 									value = parseValue(value );
 									if ( value ) {
 //{{ ? debug }}
-										console.log('[조건문, ELSE IF 출력]');
+										console.log( (new Array(block_stack.length)).join('    '),
+											'[조건문, ELSE IF 출력]');
 //{{/}}
 										current_block.is_print = true;
 										current_block.status = 1;
@@ -287,7 +291,8 @@
 								}
 								else {
 //{{ ? debug }}
-									console.log('[조건문, ELSE 출력]');
+									console.log( (new Array(block_stack.length)).join('    '),
+										'[조건문, ELSE 출력]');
 //{{/}}
 									current_block.is_print = true;
 								}
@@ -297,12 +302,13 @@
 								block_stack.pop();
 								current_block = arrayLast( block_stack );
 //{{ ? debug }}
-								console.log('[조건문 끝]');
+								console.log( (new Array(block_stack.length)).join('    '),
+									'[조건문 끝]');
 //{{/}}
 								scanner.scan(re_eol);
 							}
-							break;
 
+							continue;
 						case 2 : // loop
 							if ( scanner.scan(/^\s*\//) ) { // endof loop
 								if ( current_block.status === 0 ) {
@@ -322,19 +328,24 @@
 									block_stack.pop();
 									current_block = arrayLast( block_stack );
 //{{ ? debug }}
-									console.log('[반복문 끝]');
+									console.log( (new Array(block_stack.length)).join('    '),
+										'[반복문 끝]');
 //{{/}}
 									scanner.scan(re_eol);
 								}
 							}
-							break;
+							continue;
 					}
+//{{ ? debug }}
+					console.log( (new Array(block_stack.length)).join('    '),
+						"[모르겠는 구문 :: ??")
+//{{/}}
 				}
-
+//{{ ? debug }}
 				var end_t = process.hrtime();
 
-				console.log('Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000 );
-
+				console.log(' [Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000, ']');
+//{{/}}
 				return result;
 			}
 

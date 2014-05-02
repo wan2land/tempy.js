@@ -308,7 +308,7 @@
 
 				var end_t = process.hrtime();
 
-				console.log('Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000 );
+				console.log('[Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000, ']');
 
 				return result;
 			}
