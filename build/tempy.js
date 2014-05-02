@@ -60,9 +60,11 @@
 		var
 
 		assigned_value = {},
-		re_eoc = /[\n\r;]|(\}\})/,
+		re_eoc = /[\n\r;]|(\}\})|(--)/,
 		re_eol = /[\n\r;]/,
-
+		trim = function( string ) {
+			return string.replace(/(^\s*)|(\s*$)/g, '');
+		},
 		getAssignedValue = function( name ) {
 			var k, result = assigned_value;
 			name = name.split('.');
@@ -75,7 +77,7 @@
 			return result;
 		},
 		parseValue = function( value ) {
-			value = value.replace(/(^\s*)|(\s*$)/g, ''); // trim :)
+			value = trim( value );
 			if ( /^true$/i.test(value) ) {
 				return true;
 			}
@@ -115,11 +117,7 @@
 			},
 			render : function( values ) {
 
-				var start_t = process.hrtime();
-//* 0.000084748
-				// values 
-				// this.assign( key, value );
-
+//
 				var
 				scanner = new Scanner( '}' + '}' + contents + '{' + '{' ),
 				result = '',
@@ -135,7 +133,6 @@
 				;
 				// initialize :)
 				block_stack.push( current_block );
-
 				while( !scanner.eos() ) {
 					//sleep(1000);
 					if ( scanner.scan(/^\s*\}\}/) ) {
@@ -205,7 +202,7 @@
 //
 						var
 						iter = value.split('->'),
-						iter_name = iter[1],
+						iter_name = trim( iter[1] ),
 						iter_value = parseValue( iter[0] ),
 						iter_len = iter_value.length
 						;
@@ -241,6 +238,9 @@
 
 						continue;
 					}
+
+					// 세미콜론은 걍 지나갑시다.
+					scanner.scan(/^\s*\;/);
 
 					// 그외 경우에 처리.
 					switch( current_block.type ) {
@@ -278,8 +278,8 @@
 //
 								scanner.scan(re_eol);
 							}
-							break;
 
+							continue;
 						case 2 : // loop
 							if ( scanner.scan(/^\s*\//) ) { // endof loop
 								if ( current_block.status === 0 ) {
@@ -302,14 +302,13 @@
 									scanner.scan(re_eol);
 								}
 							}
-							break;
+							continue;
 					}
+
+
+//
 				}
-
-				var end_t = process.hrtime();
-
-				console.log('[Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000, ']');
-
+//
 				return result;
 			}
 
