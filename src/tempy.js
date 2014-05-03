@@ -6,7 +6,7 @@
 		define(factory);
 	}
 	else {
-		global.MyApp = factory();
+		global.Tempy = factory();
 	}
 })(this, function() {
 
@@ -126,7 +126,8 @@
 					this.assign( idx, values[idx] );
 				}
 //{{ ? debug }}
-				var start_t = process.hrtime();
+//				var start_t = process.hrtime();
+				var start_t = (new Date()).getTime();
 //{{/}}
 				var
 				scanner = new Scanner( '}' + '}' + contents + '{' + '{' ),
@@ -350,9 +351,11 @@
 //{{/}}
 				}
 //{{ ? debug }}
-				var end_t = process.hrtime();
+				//var end_t = process.hrtime();
+				var end_t = (new Date()).getTime();
 
-				console.log(' [Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000, ']');
+//				console.log(' [Runtime : ', end_t[0]-start_t[0] + ( end_t[1]-start_t[1] ) / 1000000000, ']');
+				console.log(' [Runtime : ', (end_t-start_t ) / 1000, ']');
 //{{/}}
 				return result;
 			}
