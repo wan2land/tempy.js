@@ -6,7 +6,7 @@
 		define(factory);
 	}
 	else {
-		global.MyApp = factory();
+		global.Tempy = factory();
 	}
 })(this, function() {
 
