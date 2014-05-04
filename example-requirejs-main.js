@@ -30,6 +30,10 @@ require(['src/tempy.js'], function(tempy) {
 				]
 			]);
 			contents.assign('qux', [true, false, false, true]);
+			contents.assign('quux', {
+				obj1 : 'obj1 string',
+				obj2 : 'obj2 string'
+			});
 
 			var rendered_contents = contents.render();
 
@@ -54,7 +58,11 @@ require(['src/tempy.js'], function(tempy) {
 						'this is baz2-3'
 					]
 				],
-				qux : [true, false, false, true]
+				qux : [true, false, false, true],
+				quux : {
+					obj1 : 'obj1 string',
+					obj2 : 'obj2 string'
+				}
 			})
 			// */
 			

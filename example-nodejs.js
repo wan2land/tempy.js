@@ -28,6 +28,10 @@ fs.readFile('./README.md', 'utf-8', function(err, data) {
 		]
 	]);
 	contents.assign('qux', [true, false, false, true]);
+	contents.assign('quux', {
+		obj1 : 'obj1 string',
+		obj2 : 'obj2 string'
+	});
 
 	var rendered_contents = contents.render();
 	
@@ -52,7 +56,11 @@ fs.readFile('./README.md', 'utf-8', function(err, data) {
 				'this is baz2-3'
 			]
 		],
-		qux : [true, false, false, true]
+		qux : [true, false, false, true],
+		quux : {
+			obj1 : 'obj1 string',
+			obj2 : 'obj2 string'
+		}
 	})
 	// */
 	
