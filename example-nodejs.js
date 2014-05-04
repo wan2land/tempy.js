@@ -4,12 +4,11 @@ Tempy = require('./src/tempy'),
 fs = require('fs')
 ;
 
-fs.readFile('./view/example.tempy', 'utf-8', function(err, data) {
+fs.readFile('./README.md', 'utf-8', function(err, data) {
 
 	var contents = Tempy.read( data );
 	contents.assign('foo', 'This is foo string.');
 	contents.assign('bar', ['this is bar0','this is bar1','this is bar2','this is bar3']);
-	//contents.assign('bar', []);
 	contents.assign('baz', [
 		[
 			'this is baz0-0',

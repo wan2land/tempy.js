@@ -1,23 +1,22 @@
 ;(function(global, factory){
-	if (typeof exports === "object") {
-		module.exports = factory();
-	}
-	else if ( typeof define === 'function' && define.amd ) {
-		define(factory);
-	}
-	else {
-		global.Tempy = factory();
-	}
+	if (typeof exports === "object")
+		module.exports = factory()
+	
+	else if ( typeof define === 'function' && define.amd )
+		define(factory)
+	
+	else
+		global.Tempy = factory()
+
 })(this, function() {
 
 //
-
-	function Scanner(string) {
+	function S(string) {
 		this.string = string;
 		this.tail = string;
 		this.pos = 0;
 	}
-	Scanner.prototype = {
+	S.prototype = {
 		eos : function() { return this.tail === ''; },
 		scan : function( re ) {
 			var match = this.tail.match(re);
@@ -122,7 +121,7 @@
 				}
 //
 				var
-				scanner = new Scanner( '}' + '}' + contents + '{' + '{' ),
+				scanner = new S( '}' + '}' + contents + '{' + '{' ),
 				result = '',
 
 				value,
