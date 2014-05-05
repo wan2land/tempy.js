@@ -267,13 +267,43 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 }}
 ```
 
+그리고 모든 반복문은 key, value로 받을 수 있습니다.
+
+> example4.8. key, value 조건문 사용
+
+```
+{{ @ items1 -> key : value }}{{=key}}, {{=value}}
+{{ / }}
+
+{{ @ items2 -> key : value }}{{=key}}, {{=value}}
+{{ / }}
+
+{{ @ items3 -> key : value }}{{=key}}, {{=value}}
+{{ / }}
+```
+
+만약에 키값만 사용하고 싶으면 value를 생략할 수 있습니다.
+
+> example4.9. 반복문에서 key값만 사용
+
+```
+{{ @ items1 -> key : }}{{=key}}
+{{ / }}
+
+{{ @ items2 -> key : }}{{=key}}
+{{ / }}
+
+{{ @items3 -> key : }}{{=key}}
+{{ / }}
+```
+
 모든 예제에 예제 번호를 적어두었는데 눈치 채셨나요? 해당 README파일은 example에서 바로 사용해서 결과를 확인해 볼 수 있습니다.
 
-### To-do
+## To-do
 
-- 반복문, {{ @items->idx:value }} 처럼 사용할 수 있게하기.
-- 연산자, + - * / === 등 사용가능하게 하기.
+- 논리 연산자, &&, ||, == 지원
+- 산술 연산자, +, -, *, /, () 지원
 
-### 참고자료
+## 참고자료
 
 - [mustache.js](https://github.com/janl/mustache.js)

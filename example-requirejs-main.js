@@ -34,6 +34,15 @@ require(['src/tempy.js'], function(tempy) {
 				obj1 : 'obj1 string',
 				obj2 : 'obj2 string'
 			});
+			contents.assign('items1', {
+				a : 'a',
+				b : 'b', 
+				c : 'c'
+			});
+			contents.assign('items2', [
+				'1', '2', '3'
+			]);
+			contents.assign('items3', 'string');
 
 			var rendered_contents = contents.render();
 
@@ -62,7 +71,16 @@ require(['src/tempy.js'], function(tempy) {
 				quux : {
 					obj1 : 'obj1 string',
 					obj2 : 'obj2 string'
-				}
+				},
+				items1 : {
+					a : 'a',
+					b : 'b',
+					c : 'c'
+				},
+				items2 : [
+					'1', '2', '3'
+				],
+				items3 : 'string'
 			})
 			// */
 			
