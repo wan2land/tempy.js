@@ -69,7 +69,8 @@
 		re_eoc = /[\n\r;]|(\}\})|(--)/,
 		re_eol = /[\n\r;]/,
 		trim = function( string ) {
-			return string.replace(/(^\s*)|(\s*$)/g, '');
+			return string.replace(/\s+/g, '');
+			//return string.replace(/(^\s*)|(\s*$)/g, '');
 		},
 		getAssignedValue = function( name ) {
 			var k, result = assigned_value;
@@ -86,7 +87,7 @@
 			return parseValue( value );
 		},
 		parseValue = function( value ) {
-			value = trim( value );
+			value = value.replace(/(^\s*)|(\s*$)/g, '');
 			if ( /^true$/i.test(value) ) {
 				return true;
 			}

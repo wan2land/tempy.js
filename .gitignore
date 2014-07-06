@@ -26,3 +26,4 @@ node_modules
 
 
 test_*
+*.result.txt

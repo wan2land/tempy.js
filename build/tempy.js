@@ -77,6 +77,9 @@
 			}
 			return result;
 		},
+		parseFormula = function( value ) {
+			return parseValue( value );
+		},
 		parseValue = function( value ) {
 			value = trim( value );
 			if ( /^true$/i.test(value) ) {
@@ -161,20 +164,11 @@
 						continue;
 					}
 
-					// 주석 무시.
-					if ( scanner.scan(/^\s*--/) ) {
-						value = scanner.scanUntil(re_eoc);
-//
-						scanner.scan(re_eol);
-
-						continue;
-					}
-
 					// print
 					if ( scanner.scan(/^\s*\=\s*/) ) {
 						value = scanner.scanUntil(re_eoc);
 						if ( current_block.isp ) {
-							value = parseValue(value );
+							value = parseFormula(value );
 							if ( typeof value !== 'undefined' && value !== null ) {
 //
 								result += value.toString();
@@ -185,10 +179,21 @@
 						continue;
 					}
 
+					// 주석 무시.
+					if ( scanner.scan(/^\s*--/) ) {
+						value = scanner.scanUntil(re_eoc);
+//
+						scanner.scan(re_eol);
+
+						continue;
+					}
+
+					// 조건문 시작
+					// 조건문에서는 parseValue가 아니라 parseFormula를 사용한다.
 					if ( scanner.scan(/^\s*\?/) ) {
 						value = scanner.scanUntil(re_eoc);
 	
-						value = parseValue(value );
+						value = parseFormula(value );
 //
 						if ( value ) { // true 일때
 //
@@ -289,7 +294,9 @@
 									current_block.isp = false;
 								}
 								else {
-									value = parseValue(value );
+
+									// 조건문에선느 parseValue대신 parseFormula를 사용한다
+									value = parseFormula(value );
 									if ( value ) {
 //
 										current_block.isp = true;
