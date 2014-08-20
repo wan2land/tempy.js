@@ -1,0 +1,27 @@
+{
+  "name": "tempy.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wan2land/tempy.js",
+  "authors": [
+    "Changwan Jun <me@wani.kr>"
+  ],
+  "description": "필요해서 만든 템플릿엔진",
+  "main": "build/tempy.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "template",
+    "engine"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
