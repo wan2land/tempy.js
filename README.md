@@ -25,6 +25,9 @@ Current Version : 0.3.0
 
 
 
+
+
+
 ## 프로젝트 소개
 
 Tempy는 한마디로 얘기하면 템플릿 엔진입니다. 필요한 기능만 구현된 최소화된 템플릿 엔진이 없을까하고 찾다가 에잉 그냥 공부도 할겸 만들어보자, 하고 시작된 프로젝트입니다.
@@ -207,7 +210,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ bar -> item
+	@ bar : item
 		= item
 		= "\n"
 	/
@@ -219,7 +222,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.2. 한줄 반복문1
 
 ```
-{{@bar->item}}{{=item}}
+{{@bar : item}}{{=item}}
 {{/}}
 ```
 
@@ -228,7 +231,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.3. 한줄 반복문2
 
 ```
-{{@bar->item;=item;="\n";/}}
+{{@bar:item;=item;="\n";/}}
 ```
 
 그렇다면 이중 반복문도 사용가능할까요? 물론입니다.
@@ -237,8 +240,8 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ baz -> items
-		@ items -> item
+	@ baz : items
+		@ items : item
 			= item
 			= "\n"
 		/
@@ -252,7 +255,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.5. 이중 반복문 한줄 사용
 
 ```
-{{@baz->items;@items->item;=item;="\n";/;="\n";/}}
+{{@baz:items;@items:item;=item;="\n";/;="\n";/}}
 ```
 
 조건문과 함께 사용해보도록 하겠습니다. 조건문 안에 반복문을 사용할 경우입니다.
@@ -262,7 +265,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 ```
 {{
 	? true
-		@ bar -> item
+		@ bar : item
 			= "조건문과 함께, "
 			= item
 			= "\n"
@@ -281,7 +284,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ qux -> item
+	@ qux : item
 		? item
 			= "True이면..\n"
 		:
@@ -296,13 +299,13 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.8. key, value 조건문 사용
 
 ```
-{{ @ items1 -> key : value }}{{=key}}, {{=value}}
+{{ @ items1 : key , value }}{{=key}}, {{=value}}
 {{ / }}
 
-{{ @ items2 -> key : value }}{{=key}}, {{=value}}
+{{ @ items2 : key , value }}{{=key}}, {{=value}}
 {{ / }}
 
-{{ @ items3 -> key : value }}{{=key}}, {{=value}}
+{{ @ items3 : key , value }}{{=key}}, {{=value}}
 {{ / }}
 ```
 
@@ -311,13 +314,13 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.9. 반복문에서 key값만 사용
 
 ```
-{{ @ items1 -> key : }}{{=key}}
+{{ @ items1 : key , }}{{=key}}
 {{ / }}
 
-{{ @ items2 -> key : }}{{=key}}
+{{ @ items2 : key , }}{{=key}}
 {{ / }}
 
-{{ @items3 -> key : }}{{=key}}
+{{ @items3 : key , }}{{=key}}
 {{ / }}
 ```
 
@@ -327,6 +330,69 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 - 논리 연산자, &&, ||, == 지원
 - 산술 연산자, +, -, *, /, () 지원
+
+
+### 자료형
+
+#### Boolean
+ - true / false
+
+#### Number
+ - 30, 20, -1, 30.154 이런식으로..
+
+#### String (single quot으로 사용가능)
+- 'hello World'
+
+#### Null
+
+
+```
+{{
+hello = 20
+= hello
+}}
+```
+#### Template Extension
+
+HTML을 더 멋있게 사용할 수 있는 Template Extension.
+Tempy는 Javascript 기반 템플릿 엔진으로서 불완전 돔은 지원하지 않습니다.
+
+
+```
+{{
+-- template.tempy
+}}
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+{{ $include child }}
+</body>
+</html>
+```
+
+```
+{{
+-- myinfo.tempy
+$template "template.tempy"
+}}
+<div>myinfo.js</div>
+```
+
+$ tempy myinfo.tempy myinfo.html
+
+```
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+<div>myinfo.js</div>
+</body>
+</html>
+```
+
 
 ## 참고자료
 
