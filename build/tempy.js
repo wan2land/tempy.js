@@ -222,7 +222,7 @@
 //
 						var
 						p,
-						iter = value.split('->'),
+						iter = value.split(':'),
 						iter_value = parseInterValue( parseValue( iter[0] ) || '' ),
 
 						iter_key_name = null,
@@ -231,7 +231,7 @@
 						iter_len = iter_value.length
 						;
 
-						if ( (p = iter_value_name.indexOf(':') ) !== -1 ) {
+						if ( (p = iter_value_name.indexOf(',') ) !== -1 ) {
 							
 							iter_key_name 		= trim( iter_value_name.substring(0, p) );
 							iter_value_name 	= trim( iter_value_name.substring(p+1) );
