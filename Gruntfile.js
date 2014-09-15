@@ -1,23 +1,42 @@
 module.exports = function(grunt) {
 
-	// Project configuration.
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		nodeunit : {
+			all : ['test/dev.*.js'],
+			build : ['test/tempy.js']
+		},
+		concat : {
+			dist : {
+				src : ['src/intro.js', 'src/tempy.js', 'src/outro.js'],
+				dest : 'dist/tempy.dev.js'
+			}
+		},
+		tempybuild : {
+			builder : 'src/tempy.js',
+			src : 'dist/tempy.dev.js',
+			dest : 'dist/tempy.js'
+		},
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				banner: '/*! <%= pkg.name %> ver.<%= pkg.version %> (build<%= grunt.template.today("yymmdd") %>) */\n'
 			},
-			build: {
-				src: 'src/<%= pkg.name %>.js',
-				dest: 'build/<%= pkg.name %>.min.js'
+			target : {
+				files : {
+					'dist/tempy.min.js' : ['dist/tempy.js']
+				}
 			}
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-	// Default task(s).
-	grunt.registerTask('default', ['uglify']);
+	grunt.loadTasks('./tasks');
+
+	grunt.registerTask('test', [ 'nodeunit:all' ]);
+	grunt.registerTask('default', ['test', 'concat', 'tempybuild', 'uglify', 'nodeunit:build']);
 
 };

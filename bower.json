@@ -1,0 +1,29 @@
+{
+  "name": "tempy.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/wan2land/tempy.js",
+  "authors": [
+    "Changwan Jun <me@wani.kr>"
+  ],
+  "description": "very simple and smart template engine.",
+  "main": "dist/tempy.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "template",
+    "engine"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15"
+  }
+}
