@@ -1,5 +1,4 @@
-{{ ? true }}
-	{{ ? false }}출력x{{ :? true }}Inner Condition{{ : }}출력x{{ / }}
+{{ ? true }}{{ ? false }}출력x{{ :? true }}Inner Condition{{ : }}출력x{{ / }}
 {{ :? true }}
 출력x
 {{ : }}
