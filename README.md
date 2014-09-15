@@ -53,12 +53,15 @@ Tempy만의 특징이라고 한다면.. 딱히 없습니다. 다른 템플릿 �
 
 ### Node에서 사용하기
 
-
+`example/example-node/main.js` 참고
 
 ### AMD에서 사용하기
 
+`example/example-amd/main.html`, `example/example-amd/main.js` 참고
+
 
 ## Tempy 문법
+
 
 ###1. 기본 문법
 
@@ -211,70 +214,8 @@ Tempy  에서 사용할수 있는 모든 문법으로 만들어본 예제입니�
 	{{ / }}
 {{ / }}
 ```
+
 모든 예제에 예제 번호를 이는 test에서 실제로 내장중입니다. test/tempy.js 파일을 참고하여주시기 바랍니다.
-
-
-
-### 자료형
-
-#### Boolean
- - true / false
-
-#### Number
- - 30, 20, -1, 30.154 이런식으로..
-
-#### String (single quot으로 사용가능)
-- 'hello World'
-
-#### Null
-
-
-```
-{{
-hello = 20
-= hello
-}}
-```
-#### Template Extension
-
-HTML을 더 멋있게 사용할 수 있는 Template Extension.
-Tempy는 Javascript 기반 템플릿 엔진으로서 불완전 돔은 지원하지 않습니다.
-
-
-```
-{{
--- template.tempy
-}}
-<!doctype html>
-<html>
-<head>
-</head>
-<body>
-{{ $include child }}
-</body>
-</html>
-```
-
-```
-{{
--- myinfo.tempy
-$template "template.tempy"
-}}
-<div>myinfo.js</div>
-```
-
-$ tempy myinfo.tempy myinfo.html
-
-```
-<!doctype html>
-<html>
-<head>
-</head>
-<body>
-<div>myinfo.js</div>
-</body>
-</html>
-```
 
 
 ## 참고자료
