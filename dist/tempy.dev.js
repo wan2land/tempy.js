@@ -1,3 +1,15 @@
+;(function(global, factory){
+	if (typeof exports === "object") {
+		module.exports = factory();
+	}
+	else if ( typeof define === 'function' && define.amd ) {
+		define(factory);
+	}
+	else {
+		global.Tempy = factory();
+	}
+})(this, function() {
+
 
 //{{ ? debug }}
 function sleep(delay) {
@@ -414,3 +426,5 @@ Tempy.read = function( contents ) {
 //{{?debug}}
 module.exports = Tempy;
 //{{/}}
+	return Tempy;
+});

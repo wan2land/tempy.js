@@ -1,0 +1,4 @@
+{{ = bar.0 }}
+{{ = bar.1 }}
+{{ = quux.obj1 }}
+{{ = quux.obj2 }}

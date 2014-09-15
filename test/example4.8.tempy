@@ -1,0 +1,8 @@
+{{ @ items1 : key, value }}{{=key}},{{=value}}
+{{ / }}
+
+{{ @ items2 : key, value }}{{=key}},{{=value}}
+{{ / }}
+
+{{ @ items3 : key, value }}{{=key}},{{=value}}
+{{ / }}
