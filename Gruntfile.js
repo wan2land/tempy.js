@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		nodeunit : {
-			all : ['test/*.js']
+			all : ['test/dev.*.js'],
+			build : ['test/tempy.js']
 		},
 		concat : {
 			dist : {
@@ -12,7 +13,7 @@ module.exports = function(grunt) {
 			}
 		},
 		tempybuild : {
-			builder : 'dist/tempy.dev.js',
+			builder : 'src/tempy.js',
 			src : 'dist/tempy.dev.js',
 			dest : 'dist/tempy.js'
 		},
@@ -20,7 +21,7 @@ module.exports = function(grunt) {
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-			my_target : {
+			target : {
 				files : {
 					'dist/tempy.min.js' : ['dist/tempy.js']
 				}
@@ -34,7 +35,7 @@ module.exports = function(grunt) {
 
 	grunt.loadTasks('./tasks');
 
-	grunt.registerTask('test', ['default', 'nodeunit']);
-	grunt.registerTask('default', ['concat', 'tempybuild','uglify']);
+	grunt.registerTask('test', [ 'nodeunit:all' ]);
+	grunt.registerTask('default', ['test', 'concat', 'tempybuild', 'uglify', 'nodeunit:build']);
 
 };
