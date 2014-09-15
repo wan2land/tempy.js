@@ -7,17 +7,17 @@ Current Version : 0.3.0
 
 ### 0.3.0
 
-#### 루프문 문법의 변경
+- 루프문 문법의 변경
 
-```
-{{ -- before }}
-{{ @ items -> key : value }} {{ / }}
+	```
+	{{ -- before }}
+	{{ @ items -> key : value }} {{ / }}
 
-{{ -- after }}
-{{ @items : key, value }}{{ / }}
-```
+	{{ -- after }}
+	{{ @items : key, value }}{{ / }}
+	```
 
-이유, 브라우저에서 직접 사용할 때 **>** 문자가 **&gt**로 바뀌는 일이 자꾸 발생
+	브라우저에서 직접 사용할 때 **>** 문자가 **&amp;gt;**로 바뀌는 일이 자꾸 발생
 
 
 ### 0.2.0
@@ -207,7 +207,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ bar -> item
+	@ bar : item
 		= item
 		= "\n"
 	/
@@ -219,7 +219,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.2. 한줄 반복문1
 
 ```
-{{@bar->item}}{{=item}}
+{{@bar:item}}{{=item}}
 {{/}}
 ```
 
@@ -228,7 +228,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.3. 한줄 반복문2
 
 ```
-{{@bar->item;=item;="\n";/}}
+{{@bar:item;=item;="\n";/}}
 ```
 
 그렇다면 이중 반복문도 사용가능할까요? 물론입니다.
@@ -237,8 +237,8 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ baz -> items
-		@ items -> item
+	@ baz : items
+		@ items : item
 			= item
 			= "\n"
 		/
@@ -252,7 +252,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.5. 이중 반복문 한줄 사용
 
 ```
-{{@baz->items;@items->item;=item;="\n";/;="\n";/}}
+{{@baz:items;@items:item;=item;="\n";/;="\n";/}}
 ```
 
 조건문과 함께 사용해보도록 하겠습니다. 조건문 안에 반복문을 사용할 경우입니다.
@@ -262,7 +262,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 ```
 {{
 	? true
-		@ bar -> item
+		@ bar : item
 			= "조건문과 함께, "
 			= item
 			= "\n"
@@ -281,7 +281,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ```
 {{
-	@ qux -> item
+	@ qux : item
 		? item
 			= "True이면..\n"
 		:
@@ -296,13 +296,13 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.8. key, value 조건문 사용
 
 ```
-{{ @ items1 -> key : value }}{{=key}}, {{=value}}
+{{ @ items1 : key, value }}{{=key}}, {{=value}}
 {{ / }}
 
-{{ @ items2 -> key : value }}{{=key}}, {{=value}}
+{{ @ items2 : key, value }}{{=key}}, {{=value}}
 {{ / }}
 
-{{ @ items3 -> key : value }}{{=key}}, {{=value}}
+{{ @ items3 : key, value }}{{=key}}, {{=value}}
 {{ / }}
 ```
 
@@ -311,13 +311,13 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 > example4.9. 반복문에서 key값만 사용
 
 ```
-{{ @ items1 -> key : }}{{=key}}
+{{ @ items1 : key , }}{{=key}}
 {{ / }}
 
-{{ @ items2 -> key : }}{{=key}}
+{{ @ items2 : key , }}{{=key}}
 {{ / }}
 
-{{ @items3 -> key : }}{{=key}}
+{{ @items3 : key , }}{{=key}}
 {{ / }}
 ```
 
@@ -325,6 +325,7 @@ Tempy 소스는 `{{ }}`로 묶여있습니다. 그리고 그 안에는 하나의
 
 ## To-do
 
+- @ : / loop else 구문 지원
 - 논리 연산자, &&, ||, == 지원
 - 산술 연산자, +, -, *, /, () 지원
 

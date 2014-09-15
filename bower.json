@@ -5,8 +5,8 @@
   "authors": [
     "Changwan Jun <me@wani.kr>"
   ],
-  "description": "필요해서 만든 템플릿엔진",
-  "main": "build/tempy.min.js",
+  "description": "very simple and smart template engine.",
+  "main": "dist/tempy.min.js",
   "moduleType": [
     "amd",
     "globals",
@@ -20,8 +20,10 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "vendor",
+    "test"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15"
+  }
 }

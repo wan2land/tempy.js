@@ -54,7 +54,9 @@
 		}
 	};
 
-	var Tempy = {};
+	var Tempy = function() {
+		/* 임시로 비워둠. */
+	};
 
 	Tempy.read = function( contents ) {
 
