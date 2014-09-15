@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		nodeunit : {
 			all : ['test/dev.*.js'],
-			build : ['test/tempy.js']
+			master : ['test/tempy.js']
 		},
 		concat : {
 			dist : {
@@ -27,16 +27,35 @@ module.exports = function(grunt) {
 					'dist/tempy.min.js' : ['dist/tempy.js']
 				}
 			}
+		},
+		update_json: {
+			bower: {
+				src: 'package.json',
+				dest: 'bower.json',
+				fields: [
+					'name',
+					'version',
+					'description',
+					'authors',
+					'homepage'
+				]
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-nodeunit');
+	grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
+	grunt.loadNpmTasks('grunt-update-json');
+
+	// tempybuild
 	grunt.loadTasks('./tasks');
 
+
+
 	grunt.registerTask('test', [ 'nodeunit:all' ]);
-	grunt.registerTask('default', ['test', 'concat', 'tempybuild', 'uglify', 'nodeunit:build']);
+	grunt.registerTask('default', ['test', 'concat', 'tempybuild', 'uglify', 'nodeunit:master', 'update_json']);
 
 };
