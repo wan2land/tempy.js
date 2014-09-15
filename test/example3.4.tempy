@@ -1,1 +1,3 @@
-{{ ? (foo === "Foo String") || false }}Condition{{ : }}Print XXXXXXX{{ / }}
+{{ @ qux : k, item }}{{ ? item }}{{=k}}[True]
+{{ : }}{{=k}}[False]
+{{ / }}{{ / }}

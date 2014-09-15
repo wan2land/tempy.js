@@ -1,0 +1,3 @@
+{{ @ items1 : k , v }}{{ ? v === 'AA' }}this({{ = k }}) is AA
+{{ : }}this({{ = k }}) is not AA
+{{ / }}{{ / }}

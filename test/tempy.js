@@ -1,6 +1,6 @@
 
 var
-tempy = require('../dist/tempy'),
+tempy = require('../dist/tempy.min'),
 fs = require('fs'),
 assigned_value = {
 	foo : 'Foo String',
@@ -44,16 +44,17 @@ module.exports = {
 			'example1.1.tempy' : 'hello\nworld',
 			'example1.2.tempy' : 'Foo String',
 
-			'example3.1.tempy' : 'Print1\n\nPrint2\n\nPrint3',
-			'example3.3.tempy' : 'Inner Condition\n',
-			'example3.4.tempy' : 'Condition',
+			'example2.1.tempy' : 'Print1\n\nPrint2\n\nPrint3',
+			'example2.2.tempy' : 'Inner Condition\n',
+			'example2.3.tempy' : 'Condition',
 
-			'example4.1.tempy' : 'Bar0\nBar1\nBar2\n',
-			'example4.2.tempy' : 'this is baz0-0\nthis is baz0-1\n\nthis is baz1-0\nthis is baz1-1\nthis is baz1-2\n\nthis is baz2-0\nthis is baz2-1\nthis is baz2-2\nthis is baz2-3\n\n',
-			'example4.3.tempy' : '[With Condition:Bar0][With Condition:Bar1][With Condition:Bar2]',
-			'example4.4.tempy' : '0[True]\n1[False]\n2[False]\n3[True]\n',
-			'example4.5.tempy' : 'a,AA\nb,BB\nc,CC\n\n\n0,00\n1,11\n2,22\n',
-			'example4.6.tempy' : 'a\nb\nc\n\n\n0\n1\n2\n',
+			'example3.1.tempy' : 'Bar0\nBar1\nBar2\n',
+			'example3.2.tempy' : 'this is baz0-0\nthis is baz0-1\n\nthis is baz1-0\nthis is baz1-1\nthis is baz1-2\n\nthis is baz2-0\nthis is baz2-1\nthis is baz2-2\nthis is baz2-3\n\n',
+			'example3.3.tempy' : '[With Condition:Bar0][With Condition:Bar1][With Condition:Bar2]',
+			'example3.4.tempy' : '0[True]\n1[False]\n2[False]\n3[True]\n',
+			'example3.5.tempy' : 'a,AA\nb,BB\nc,CC\n\n\n0,00\n1,11\n2,22\n',
+			'example3.6.tempy' : 'a\nb\nc\n\n\n0\n1\n2\n',
+			'example3.7.tempy' : 'this(a) is AA\nthis(b) is not AA\nthis(c) is not AA\n',
 		};
 
 		for ( key in examples ) {

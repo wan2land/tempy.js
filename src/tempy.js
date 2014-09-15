@@ -60,7 +60,7 @@ Tempy.read = function( codes ) {
 			}
 
 //{{ ? debug == true }}
-			console.log( ret );
+//			console.log( ret );
 //{{ / }}f
 
 

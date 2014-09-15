@@ -1,5 +1,2 @@
-{{ ? true }}Print1{{ :? true }}출력x{{ : }}출력x{{ / }}
-
-{{ ? false }}출력x{{ :? true }}Print2{{ : }}출력x{{ / }}
-
-{{ ? false }}출력x{{ :? false }}출력x{{ : }}Print3{{ / }}
+{{ @ bar : item }}{{ = item }}
+{{ / }}
