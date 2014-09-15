@@ -1,5 +1,5 @@
-{{ ? true }}{{ @ bar : item }}[With Condition:{{=item}}]{{ / }}{{ :? true }}
-출력 x
-{{ : }}
-출력 x
+{{ @ items1 : key , }}{{=key}}
+{{ / }}
+
+{{ @ items2 : key , }}{{=key}}
 {{ / }}

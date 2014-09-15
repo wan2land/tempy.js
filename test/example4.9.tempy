@@ -1,8 +1,0 @@
-{{ @ items1 : key , }}{{=key}}
-{{ / }}
-
-{{ @ items2 : key , }}{{=key}}
-{{ / }}
-
-{{ @items3 : key , }}{{=key}}
-{{ / }}
